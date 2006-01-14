@@ -1,9 +1,10 @@
 require "crypt/rijndael"
-require "crypt/cbc"
 plaintext='12234567890dsgayufkgdadseluhkigfkukgkusdygfuewyetuygkuycvwegw,a3qwa'
-key='xxxxxxxxxxxxxxxx'
-iv='yyyyyyyyyyyyyyyy'
+key="x"*16
+iv="y"*16
 cipher=Crypt::Rijndael.new(key)
+raise unless cipher.encrypt("1"*16)
+require "./cbc"
 chain_cipher=Crypt::CBC.new(cipher)
 
 raise unless chain_cipher.encrypt(iv, plaintext) == cipher.encrypt_CBC(iv, plaintext)
