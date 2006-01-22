@@ -37,7 +37,7 @@ class Crypt
                     i*block_size .. (block_size*(i+1))-1
                 ]
                 to_encrypt=last_block_e^current_block
-                last_block_e=@cipher.encrypt(to_encrypt)
+                last_block_e=ByteStream.new(@cipher.encrypt(to_encrypt))
                 r_data+=last_block_e
             end
             return r_data
