@@ -1,0 +1,8 @@
+0.3
+	- Massive speedups
+	- Ensures that the output is the correct class type
+0.2
+	- Fix test to not depend on Crypt::Rijndael (add Crypt::Dummy)
+0.1
+	- Initial revision
+
