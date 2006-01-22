@@ -30,11 +30,9 @@ class Crypt
             r_data="-" * plaintext.length
             
 						j=0
-            (plaintext.length/block_size).times do
-                |i|
-                current_block=plaintext[
-                    i*block_size .. (block_size*(i+1))-1
-                ]
+						pt_l = plaintext.length
+						while(j<pt_l)
+                current_block=plaintext[j, block_size]
                 to_encrypt=last_block_e^current_block
                 last_block_e=ByteStream.new(@cipher.encrypt(to_encrypt))
                 r_data[j, block_size]=last_block_e
@@ -53,9 +51,9 @@ class Crypt
             
             r_data="-" * ciphertext.length
 						j=0
-            (ciphertext.length/block_size).times do
-                |i|
-                current_block=ciphertext[i*block_size .. (block_size*(i+1))-1]
+						ct_l = ciphertext.length
+						while(j<ct_l)
+                current_block=ciphertext[j, block_size]
 
                 pt_block=@cipher.decrypt(current_block)
                 decrypted=last_block_e^pt_block
