@@ -32,9 +32,7 @@ class Crypt
 						j=0
 						pt_l = plaintext.length
 						while(j<pt_l)
-                current_block=plaintext[j, block_size]
-                to_encrypt=last_block_e^current_block
-                last_block_e=ByteStream.new(@cipher.encrypt(to_encrypt))
+                last_block_e[0,block_size]=@cipher.encrypt(last_block_e^plaintext[j, block_size])
                 r_data[j, block_size]=last_block_e
 								j+=block_size
             end
@@ -52,13 +50,12 @@ class Crypt
             r_data="-" * ciphertext.length
 						j=0
 						ct_l = ciphertext.length
+						current_block = "-" * block_size
 						while(j<ct_l)
                 current_block=ciphertext[j, block_size]
 
-                pt_block=@cipher.decrypt(current_block)
-                decrypted=last_block_e^pt_block
-                last_block_e=ByteStream.new(current_block)
-                r_data[j, block_size]=decrypted
+                r_data[j, block_size]=last_block_e^@cipher.decrypt(current_block)
+                last_block_e[0,block_size]=current_block
 								j+=block_size
             end
             r_data=CBC.unpad_pkcs5(r_data)
