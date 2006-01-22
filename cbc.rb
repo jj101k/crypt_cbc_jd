@@ -26,19 +26,19 @@ class Crypt
                     
             last_block_e=ByteStream.new(iv)
             
-            r_data=""
             plaintext=CBC.pad_pkcs5(plaintext, iv.length)
+            r_data="-" * plaintext.length
             
-            pt_l=plaintext.length
-            
-            (0 .. (pt_l/block_size)-1).each do
+						j=0
+            (plaintext.length/block_size).times do
                 |i|
                 current_block=plaintext[
                     i*block_size .. (block_size*(i+1))-1
                 ]
                 to_encrypt=last_block_e^current_block
                 last_block_e=ByteStream.new(@cipher.encrypt(to_encrypt))
-                r_data+=last_block_e
+                r_data[j, block_size]=last_block_e
+								j+=block_size
             end
             return r_data
         end
@@ -51,15 +51,17 @@ class Crypt
                 raise "Bad IV: doesn't match ciphertext length"
             end
             
-            r_data=""
-            (0 .. (ciphertext.length/block_size)-1).each do
+            r_data="-" * ciphertext.length
+						j=0
+            (ciphertext.length/block_size).times do
                 |i|
                 current_block=ciphertext[i*block_size .. (block_size*(i+1))-1]
 
                 pt_block=@cipher.decrypt(current_block)
                 decrypted=last_block_e^pt_block
                 last_block_e=ByteStream.new(current_block)
-                r_data+=decrypted
+                r_data[j, block_size]=decrypted
+								j+=block_size
             end
             r_data=CBC.unpad_pkcs5(r_data)
             return r_data
