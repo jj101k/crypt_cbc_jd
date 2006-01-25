@@ -1,7 +1,7 @@
 class Crypt
     class CBC
 
-        require "bytestream"    
+        require "crypt/bytestream"    
         def CBC.pad_pkcs5(string, to_length) #:nodoc:
             diff= to_length - (string.length % to_length)
             string+=[diff].pack("C") * diff
@@ -24,7 +24,7 @@ class Crypt
         def encrypt(iv, plaintext)
             block_size=iv.length
                     
-            last_block_e=ByteStream.new(iv)
+            last_block_e=Crypt::ByteStream.new(iv)
             
             plaintext=CBC.pad_pkcs5(plaintext, iv.length)
             r_data="-" * plaintext.length
@@ -41,7 +41,7 @@ class Crypt
         def decrypt(iv, ciphertext)
             block_size=iv.length
         
-            last_block_e=ByteStream.new(iv)
+            last_block_e=Crypt::ByteStream.new(iv)
 
             unless(ciphertext.length % block_size==0)
                 raise "Bad IV: doesn't match ciphertext length"
