@@ -1,4 +1,6 @@
-require "crypt/bytestream"
+unless(defined? Crypt::ByteStream)
+	require "crypt/bytestream"
+end
 class Crypt
 	class Dummy
 		def initialize(encryption_key)

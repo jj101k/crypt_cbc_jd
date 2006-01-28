@@ -1,7 +1,9 @@
+unless(defined? Crypt::ByteStream)
+	require "crypt/bytestream"    
+end
 class Crypt
     class CBC
 
-        require "crypt/bytestream"    
         def CBC.pad_pkcs5(string, to_length) #:nodoc:
             diff= to_length - (string.length % to_length)
             string+=[diff].pack("C") * diff
