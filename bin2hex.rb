@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+puts STDIN.read.unpack("H*")
