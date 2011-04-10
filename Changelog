@@ -1,5 +1,9 @@
 v0.6
-0.6
+Jim Driscoll (4):
+      Doc update
+      Be specific about the permissions
+      Testing notes
+      1.9 compat: use String#getbyte rather than String#[] when present
 v0.5
 Jim A. Driscoll:
       Fix changelog
