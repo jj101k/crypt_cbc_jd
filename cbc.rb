@@ -1,5 +1,5 @@
 unless(defined? Crypt::ByteStream)
-	require "crypt/bytestream"    
+  require "crypt/bytestream"    
 end
 class Crypt
     class CBC
@@ -37,12 +37,12 @@ class Crypt
             plaintext=CBC.pad_pkcs5(plaintext, iv.length)
             r_data="-" * plaintext.length
             
-						j=0
-						pt_l = plaintext.length
-						while(j<pt_l)
+            j=0
+            pt_l = plaintext.length
+            while(j<pt_l)
                 last_block_e[0,block_size]=@cipher.encrypt(last_block_e^plaintext[j, block_size])
                 r_data[j, block_size]=last_block_e
-								j+=block_size
+                j+=block_size
             end
             return r_data
         end
@@ -56,15 +56,15 @@ class Crypt
             end
             
             r_data="-" * ciphertext.length
-						j=0
-						ct_l = ciphertext.length
-						current_block = "-" * block_size
-						while(j<ct_l)
+            j=0
+            ct_l = ciphertext.length
+            current_block = "-" * block_size
+            while(j<ct_l)
                 current_block=ciphertext[j, block_size]
 
                 r_data[j, block_size]=last_block_e^@cipher.decrypt(current_block)
                 last_block_e[0,block_size]=current_block
-								j+=block_size
+                j+=block_size
             end
             r_data=CBC.unpad_pkcs5(r_data)
             return r_data
