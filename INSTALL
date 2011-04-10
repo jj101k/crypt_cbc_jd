@@ -1,0 +1,6 @@
+Prerequisites: Crypt::ByteStream
+
+Installing:
+
+ruby test.rb
+sudo ruby install.rb

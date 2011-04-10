@@ -1,0 +1,35 @@
+NAME
+
+  Crypt::CBC
+
+DESCRIPTION
+
+This provides CBC block-cipher-to-stream-cipher capability. If
+you're using a block cipher like AES or Blowfish, you'll want
+something like this to handle variable-length input.
+
+FILES
+
+bin2hex.rb
+hex2bin.rb
+  - Helpers for the test scripts so that you don't have to deal
+    with binary data
+crypt_dummy.rb
+  - Helper class for testing. This does the simplest (and probably
+    the worst for this purpose) encryption cipher: XOR.
+test.rb
+  - Test script. Usage: ruby test.rb
+openssl_like.rb
+  - Helper for testing. This behaves like command-line openssl,
+    which makes it easy to see if Crypt::CBC is doing the wrong
+    thing.
+install.rb
+  - Installs the module. Usage: ruby install.rb
+mkrelease.sh
+mktar.sh
+  - Helpers to make releases. You don't need to touch these.
+cbc.rb
+  - The Crypt::CBC module which will be installed.
+
+All files copyright 2005-2011 Jim Driscoll <jim.a.driscoll@gmail.com>,
+see COPYING for details.
