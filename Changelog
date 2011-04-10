@@ -1,3 +1,14 @@
+v0.7
+Jim Driscoll (8):
+      Fix changelog again
+      Consistent indentation
+      Update the tester to use ENV["_"] to ensure the Ruby interpreter is the same
+      Remove useless #! line
+      Remove now-defunct note, and add a copyright section to README
+      Ignore .rbc files
+      Update release tools
+      Document compatibility and performance
+
 v0.6
 Jim Driscoll (4):
       Doc update
