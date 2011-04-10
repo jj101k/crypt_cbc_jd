@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 class_file, class_constant_name, key_hex, iv_hex = *ARGV
 require "crypt/" + class_file
 klass = Crypt.const_get(class_constant_name)
