@@ -33,6 +33,11 @@ cbc.rb
 
 NOTES
 
+COMPATIBILITY AND PERFORMANCE
+
+Ruby 1.9: Ruby core works, test.rb with Crypt::Rijndael takes 0.15s
+Rubinius 1.2.3: Ruby core works, test.rb with Crypt::Rijndael takes 0.13s (0.18s)
+
 COPYRIGHT
 
 All files copyright 2005-2011 Jim Driscoll <jim.a.driscoll@gmail.com>,
