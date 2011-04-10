@@ -33,8 +33,7 @@ cbc.rb
 
 NOTES
 
-If you want to test with Rubinius, you'll need to edit openssl_like.rb
-to refer to rbx rather than ruby.
+COPYRIGHT
 
 All files copyright 2005-2011 Jim Driscoll <jim.a.driscoll@gmail.com>,
 see COPYING for details.
