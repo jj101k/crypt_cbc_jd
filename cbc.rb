@@ -3,6 +3,8 @@ unless(defined? Crypt::ByteStream)
 end
 class Crypt
     class CBC
+      # YARV (1.9) compat
+      Use_getbyte = "".respond_to?(:getbyte)
 
         def CBC.pad_pkcs5(string, to_length) #:nodoc:
             diff= to_length - (string.length % to_length)
@@ -13,7 +15,11 @@ class Crypt
         def CBC.unpad_pkcs5(string) #:nodoc:
             return unless string.length > 0
             
-            pad_len=string[-1]
+            if(Use_getbyte) # 1.9 returns a string from []
+              pad_len = string.getbyte(-1)
+            else
+              pad_len = string[-1]
+            end
             unless(string.slice!(-pad_len .. -1) == [pad_len].pack("C") * pad_len)
                 raise "Unpad failure: trailing junk found"
             end
