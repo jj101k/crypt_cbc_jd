@@ -1,7 +1,7 @@
 unless(defined? JdCrypt::ByteStream)
 	require "jdcrypt/bytestream"
 end
-class Crypt
+class JdCrypt
 	class Dummy
 		def initialize(encryption_key)
 			@encryption_key=JdCrypt::ByteStream.new(encryption_key)

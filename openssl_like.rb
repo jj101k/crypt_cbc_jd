@@ -6,5 +6,5 @@ iv = [iv_hex].pack("H*")
 require "./cbc"
 plaintext=STDIN.gets
 cipher = klass.new(key)
-cbc = Crypt::CBC.new(cipher)
+cbc = JdCrypt::CBC.new(cipher)
 print cbc.encrypt(iv, plaintext)

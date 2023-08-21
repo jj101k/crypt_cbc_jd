@@ -1,7 +1,7 @@
 unless(defined? JdCrypt::ByteStream)
   require "jdcrypt/bytestream"
 end
-class Crypt
+class JdCrypt
     class CBC
       # YARV (1.9) compat
       Use_getbyte = "".respond_to?(:getbyte)

@@ -1,6 +1,6 @@
 NAME
 
-  Crypt::CBC
+  JdCrypt::CBC
 
 DESCRIPTION
 
@@ -21,7 +21,7 @@ test.rb
   - Test script. Usage: ruby test.rb
 openssl_like.rb
   - Helper for testing. This behaves like command-line openssl,
-    which makes it easy to see if Crypt::CBC is doing the wrong
+    which makes it easy to see if JdCrypt::CBC is doing the wrong
     thing.
 install.rb
   - Installs the module. Usage: ruby install.rb
@@ -29,7 +29,7 @@ mkrelease.sh
 mktar.sh
   - Helpers to make releases. You don't need to touch these.
 cbc.rb
-  - The Crypt::CBC module which will be installed.
+  - The JdCrypt::CBC module which will be installed.
 
 NOTES
 
