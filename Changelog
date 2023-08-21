@@ -1,3 +1,8 @@
+0.8
+Jim Driscoll (2):
+      Use the new ByteStream
+      Move this to the JdCrypt namespace
+
 v0.7
 Jim Driscoll (8):
       Fix changelog again
