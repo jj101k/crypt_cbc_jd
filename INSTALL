@@ -1,4 +1,4 @@
-Prerequisites: Crypt::ByteStream
+Prerequisites: JdCrypt::ByteStream
 
 Installing:
 

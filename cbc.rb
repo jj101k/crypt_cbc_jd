@@ -1,5 +1,5 @@
-unless(defined? Crypt::ByteStream)
-  require "crypt/bytestream"    
+unless(defined? JdCrypt::ByteStream)
+  require "jdcrypt/bytestream"
 end
 class Crypt
     class CBC
@@ -11,10 +11,10 @@ class Crypt
             string+=[diff].pack("C") * diff
             return string
         end
-        
+
         def CBC.unpad_pkcs5(string) #:nodoc:
             return unless string.length > 0
-            
+
             if(Use_getbyte) # 1.9 returns a string from []
               pad_len = string.getbyte(-1)
             else
@@ -25,18 +25,18 @@ class Crypt
             end
             return string
         end
-        
+
         def initialize(cipher)
             @cipher=cipher
         end
         def encrypt(iv, plaintext)
             block_size=iv.length
-                    
-            last_block_e=Crypt::ByteStream.new(iv)
-            
+
+            last_block_e=JdCrypt::ByteStream.new(iv)
+
             plaintext=CBC.pad_pkcs5(plaintext, iv.length)
             r_data="-" * plaintext.length
-            
+
             j=0
             pt_l = plaintext.length
             while(j<pt_l)
@@ -48,13 +48,13 @@ class Crypt
         end
         def decrypt(iv, ciphertext)
             block_size=iv.length
-        
-            last_block_e=Crypt::ByteStream.new(iv)
+
+            last_block_e=JdCrypt::ByteStream.new(iv)
 
             unless(ciphertext.length % block_size==0)
                 raise "Bad IV: doesn't match ciphertext length"
             end
-            
+
             r_data="-" * ciphertext.length
             j=0
             ct_l = ciphertext.length

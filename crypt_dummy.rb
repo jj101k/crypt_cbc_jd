@@ -1,10 +1,10 @@
-unless(defined? Crypt::ByteStream)
-	require "crypt/bytestream"
+unless(defined? JdCrypt::ByteStream)
+	require "jdcrypt/bytestream"
 end
 class Crypt
 	class Dummy
 		def initialize(encryption_key)
-			@encryption_key=Crypt::ByteStream.new(encryption_key)
+			@encryption_key=JdCrypt::ByteStream.new(encryption_key)
 		end
 		def encrypt(plaintext)
 			@encryption_key^plaintext
