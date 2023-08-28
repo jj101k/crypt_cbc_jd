@@ -20,12 +20,12 @@ plaintext_hex = "4f682c20746865206772616e64206f6c642044756b65206f6620596f726b"
 %w{blowfish rijndael}.each do
        |file|
        begin
-       require "crypt/#{file}"
+       require "jdcrypt/#{file}"
        rescue LoadError
        end
 end
 
-if(defined? Crypt::Blowfish) then
+if(defined? JdCrypt::Blowfish) then
        key_hex = "DB"*16
        iv_hex = "00"*8
        fake_openssl = "./hex2bin.rb #{plaintext_hex} | #{ENV['_']} ./openssl_like.rb blowfish Blowfish #{key_hex} #{iv_hex} | ./bin2hex.rb"
@@ -34,7 +34,7 @@ if(defined? Crypt::Blowfish) then
        system(fake_openssl)
        puts real_openssl
        system(fake_openssl)
-elsif(defined? Crypt::AES) then
+elsif(defined? JdCrypt::AES) then
        key_hex = "DB"*16
        iv_hex = "00"*16
        fake_openssl = "./hex2bin.rb #{plaintext_hex} | #{ENV['_']} ./openssl_like.rb rijndael AES #{key_hex} #{iv_hex} | ./bin2hex.rb"
