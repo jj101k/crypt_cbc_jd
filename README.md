@@ -1,14 +1,23 @@
-NAME
+# JdCrypt::CBC
 
-  JdCrypt::CBC
-
-DESCRIPTION
+**Important note** You should probably use the OpenSSL module instead
 
 This provides CBC block-cipher-to-stream-cipher capability. If
 you're using a block cipher like AES or Blowfish, you'll want
 something like this to handle variable-length input.
 
-FILES
+## Usage
+
+```ruby
+require "jdcrypt/aes" # For example
+require "jdcrypt/cbc"
+
+cipher = JdCrypt::AES.new(key)
+cbc = JdCrypt::CBC.new(cipher)
+cbc.encrypt(iv, plaintext)
+```
+
+# FILES
 
 bin2hex.rb
 hex2bin.rb
@@ -31,14 +40,13 @@ mktar.sh
 cbc.rb
   - The JdCrypt::CBC module which will be installed.
 
-NOTES
+# NOTES
 
-COMPATIBILITY AND PERFORMANCE
+## COMPATIBILITY AND PERFORMANCE
 
-Ruby 1.9: Ruby core works, test.rb with JdCrypt::Rijndael takes 0.15s
-Rubinius 1.2.3: Ruby core works, test.rb with JdCrypt::Rijndael takes 0.13s (0.18s)
+Ruby 2.6: test.rb with JdCrypt::AES takes 0.06s
 
-COPYRIGHT
+# COPYRIGHT
 
 All files copyright 2005-2023 Jim Driscoll <jim.a.driscoll@gmail.com>,
 see COPYING for details.
