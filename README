@@ -35,8 +35,8 @@ NOTES
 
 COMPATIBILITY AND PERFORMANCE
 
-Ruby 1.9: Ruby core works, test.rb with Crypt::Rijndael takes 0.15s
-Rubinius 1.2.3: Ruby core works, test.rb with Crypt::Rijndael takes 0.13s (0.18s)
+Ruby 1.9: Ruby core works, test.rb with JdCrypt::Rijndael takes 0.15s
+Rubinius 1.2.3: Ruby core works, test.rb with JdCrypt::Rijndael takes 0.13s (0.18s)
 
 COPYRIGHT
 
