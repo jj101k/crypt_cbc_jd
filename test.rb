@@ -26,7 +26,9 @@ rescue LoadError
   # Will be checked below
 end
 
+tests_done = 0
 if defined? JdCrypt::Blowfish
+  tests_done += 1
   key_hex = "DB" * 16
   iv_hex = "00" * 8
   fake_openssl = "./hex2bin.rb #{plaintext_hex} | #{ENV["_"]} ./openssl_like.rb blowfish Blowfish #{key_hex} #{iv_hex} \
@@ -36,7 +38,9 @@ if defined? JdCrypt::Blowfish
   system(fake_openssl)
   puts real_openssl
   system(fake_openssl)
-elsif defined? JdCrypt::AES
+end
+if defined? JdCrypt::AES
+  tests_done += 1
   key_hex = "DB" * 16
   iv_hex = "00" * 16
   fake_openssl = "./hex2bin.rb #{plaintext_hex} | #{ENV["_"]} ./openssl_like.rb rijndael AES #{key_hex} #{iv_hex} \
@@ -46,6 +50,6 @@ elsif defined? JdCrypt::AES
   system(fake_openssl)
   puts real_openssl
   system(fake_openssl)
-else
-  puts "No detectable block-encryption modules; skipping openssl tests"
 end
+
+puts "No detectable block-encryption modules; skipping openssl tests" if tests_done.zero?
