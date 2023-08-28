@@ -35,7 +35,10 @@ if defined? JdCrypt::Blowfish
     | ./bin2hex.rb"
   real_openssl = "./hex2bin.rb #{plaintext_hex} | openssl bf-cbc -nosalt -K #{key_hex} -iv #{iv_hex} | ./bin2hex.rb"
   puts fake_openssl
+  before = Time.now
   system(fake_openssl)
+  after = Time.now
+  puts "Took #{after - before}s"
   puts real_openssl
   system(fake_openssl)
 end
@@ -47,7 +50,10 @@ if defined? JdCrypt::AES
     | ./bin2hex.rb"
   real_openssl = "./hex2bin.rb #{plaintext_hex} | openssl bf-cbc -nosalt -K #{key_hex} -iv #{iv_hex} | ./bin2hex.rb"
   puts fake_openssl
+  before = Time.now
   system(fake_openssl)
+  after = Time.now
+  puts "Took #{after - before}s"
   puts real_openssl
   system(fake_openssl)
 end
