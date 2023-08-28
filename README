@@ -40,5 +40,5 @@ Rubinius 1.2.3: Ruby core works, test.rb with JdCrypt::Rijndael takes 0.13s (0.1
 
 COPYRIGHT
 
-All files copyright 2005-2011 Jim Driscoll <jim.a.driscoll@gmail.com>,
+All files copyright 2005-2023 Jim Driscoll <jim.a.driscoll@gmail.com>,
 see COPYING for details.
