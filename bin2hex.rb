@@ -1,2 +1,5 @@
 #!/usr/bin/env ruby
-puts STDIN.read.unpack("H*")
+
+# frozen_string_literal: true
+
+puts $stdin.read.unpack("H*")
