@@ -48,7 +48,7 @@ if defined? JdCrypt::AES
   iv_hex = "00" * 16
   fake_openssl = "./hex2bin.rb #{plaintext_hex} | #{ENV["_"]} ./openssl_like.rb aes AES #{key_hex} #{iv_hex} \
     | ./bin2hex.rb"
-  real_openssl = "./hex2bin.rb #{plaintext_hex} | openssl bf-cbc -nosalt -K #{key_hex} -iv #{iv_hex} | ./bin2hex.rb"
+  real_openssl = "./hex2bin.rb #{plaintext_hex} | openssl aes-128-cbc -nosalt -K #{key_hex} -iv #{iv_hex} | ./bin2hex.rb"
   puts fake_openssl
   before = Time.now
   system(fake_openssl)
