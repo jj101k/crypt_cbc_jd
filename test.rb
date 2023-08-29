@@ -40,7 +40,10 @@ if defined? JdCrypt::Blowfish
   after = Time.now
   puts "Took #{after - before}s"
   puts real_openssl
+  before = Time.now
   system(fake_openssl)
+  after = Time.now
+  puts "Took #{after - before}s"
 end
 if defined? JdCrypt::AES
   tests_done += 1
@@ -55,7 +58,10 @@ if defined? JdCrypt::AES
   after = Time.now
   puts "Took #{after - before}s"
   puts real_openssl
+  before = Time.now
   system(fake_openssl)
+  after = Time.now
+  puts "Took #{after - before}s"
 end
 
 puts "No detectable block-encryption modules; skipping openssl tests" if tests_done.zero?
