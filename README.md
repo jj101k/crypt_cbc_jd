@@ -19,10 +19,6 @@ cbc.encrypt(iv, plaintext)
 
 # FILES
 
-bin2hex.rb
-hex2bin.rb
-  - Helpers for the test scripts so that you don't have to deal
-    with binary data
 crypt_dummy.rb
   - Helper class for testing. This does the simplest (and probably
     the worst for this purpose) encryption cipher: XOR.

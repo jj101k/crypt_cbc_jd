@@ -31,17 +31,24 @@ if defined? JdCrypt::Blowfish
   tests_done += 1
   key_hex = "DB" * 16
   iv_hex = "00" * 8
-  fake_openssl = "./hex2bin.rb #{plaintext_hex} | #{ENV["_"]} ./openssl_like.rb blowfish Blowfish #{key_hex} #{iv_hex} \
-    | ./bin2hex.rb"
-  real_openssl = "./hex2bin.rb #{plaintext_hex} | openssl bf-cbc -nosalt -K #{key_hex} -iv #{iv_hex} | ./bin2hex.rb"
+  fake_openssl = "#{ENV["_"]} ./openssl_like.rb blowfish Blowfish #{key_hex} #{iv_hex}"
+  real_openssl = "openssl enc -bf-cbc -K #{key_hex} -iv #{iv_hex}"
   puts fake_openssl
   before = Time.now
-  system(fake_openssl)
+  IO.popen(fake_openssl, mode: "r+") do |io|
+    io.write(plaintext)
+    io.close_write
+    puts io.read.unpack("H*")
+  end
   after = Time.now
   puts "Took #{after - before}s"
   puts real_openssl
   before = Time.now
-  system(real_openssl)
+  IO.popen(real_openssl, mode: "r+") do |io|
+    io.write(plaintext)
+    io.close_write
+    puts io.read.unpack("H*")
+  end
   after = Time.now
   puts "Took #{after - before}s"
 end
@@ -49,17 +56,24 @@ if defined? JdCrypt::AES
   tests_done += 1
   key_hex = "DB" * 16
   iv_hex = "00" * 16
-  fake_openssl = "./hex2bin.rb #{plaintext_hex} | #{ENV["_"]} ./openssl_like.rb aes AES #{key_hex} #{iv_hex} \
-    | ./bin2hex.rb"
-  real_openssl = "./hex2bin.rb #{plaintext_hex} | openssl aes-128-cbc -nosalt -K #{key_hex} -iv #{iv_hex} | ./bin2hex.rb"
+  fake_openssl = "#{ENV["_"]} ./openssl_like.rb aes AES #{key_hex} #{iv_hex}"
+  real_openssl = "openssl enc -aes-128-cbc -nosalt -K #{key_hex} -iv #{iv_hex}"
   puts fake_openssl
   before = Time.now
-  system(fake_openssl)
+  IO.popen(fake_openssl, mode: "r+") do |io|
+    io.write(plaintext)
+    io.close_write
+    puts io.read.unpack("H*")
+  end
   after = Time.now
   puts "Took #{after - before}s"
   puts real_openssl
   before = Time.now
-  system(real_openssl)
+  IO.popen(real_openssl, mode: "r+") do |io|
+    io.write(plaintext)
+    io.close_write
+    puts io.read.unpack("H*")
+  end
   after = Time.now
   puts "Took #{after - before}s"
 end
