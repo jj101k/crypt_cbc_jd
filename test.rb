@@ -41,7 +41,7 @@ if defined? JdCrypt::Blowfish
   puts "Took #{after - before}s"
   puts real_openssl
   before = Time.now
-  system(fake_openssl)
+  system(real_openssl)
   after = Time.now
   puts "Took #{after - before}s"
 end
@@ -59,7 +59,7 @@ if defined? JdCrypt::AES
   puts "Took #{after - before}s"
   puts real_openssl
   before = Time.now
-  system(fake_openssl)
+  system(real_openssl)
   after = Time.now
   puts "Took #{after - before}s"
 end
