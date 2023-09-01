@@ -12,9 +12,9 @@ require "./cbc"
 chain_cipher = JdCrypt::CBC.new(cipher)
 
 ciphertext = chain_cipher.encrypt(iv, plaintext)
-raise unless ciphertext
+raise "Can't encrypt" unless ciphertext
 
-raise unless chain_cipher.decrypt(iv, ciphertext) == plaintext
+raise "Can't decrypt" unless chain_cipher.decrypt(iv, ciphertext) == plaintext
 
 puts "Success!"
 
