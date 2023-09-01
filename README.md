@@ -1,6 +1,7 @@
 # JdCrypt::CBC
 
-**Important note** You should probably use the OpenSSL module instead
+**Important note** You should probably use the OpenSSL module instead. It will
+be significantly faster and more reliable
 
 This provides CBC block-cipher-to-stream-cipher capability. If
 you're using a block cipher like AES or Blowfish, you'll want
