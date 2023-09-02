@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "jdcrypt/bytestream" unless defined? JdCrypt::ByteStream
+require "securerandom"
 
 class JdCrypt
   # Performs cipher block chaining
@@ -12,6 +13,18 @@ class JdCrypt
       diff = to_length - (string.length % to_length)
       string += [diff].pack("C") * diff
       string
+    end
+
+    # Detect the longest block size for the cipher
+    def longest_block_size
+      throw :block_length_unknown unless @cipher.respond_to? :block_sizes_supported
+
+      @cipher.block_sizes_supported.max
+    end
+
+    # Produces a secure random initialisation vector
+    def random_iv(length = longest_block_size)
+      SecureRandom.random_bytes(length)
     end
 
     def self.unpad_pkcs5(string) # :nodoc:
@@ -31,6 +44,11 @@ class JdCrypt
 
     def initialize(cipher)
       @cipher = cipher
+    end
+
+    def encrypt_simple(plaintext)
+      iv = random_iv
+      [iv, encrypt(iv, plaintext)]
     end
 
     def encrypt(iv, plaintext)

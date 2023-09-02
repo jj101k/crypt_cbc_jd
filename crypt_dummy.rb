@@ -9,6 +9,10 @@ class JdCrypt
       @encryption_key = JdCrypt::ByteStream.new(encryption_key)
     end
 
+    def block_sizes_supported
+      [16]
+    end
+
     def encrypt(plaintext)
       @encryption_key ^ plaintext
     end
