@@ -39,6 +39,22 @@ cbc.rb
 
 # NOTES
 
+## Initialisation Vectors
+
+The initialisation vector (IV) doesn't need to be pure-random, but
+you probably want it to be unique as it helps prevent (partially)
+identical messages from having (partially) identical ciphertexts.
+Note that this functionality is compatible with OpenSSL in aes-*-cbc mode with a
+specific IV and key.
+
+If you don't want to generate your own IV, you can use:
+
+```ruby
+iv, ciphertext = cbc.encrypt_simple(plaintext)
+```
+
+For decryption you will still need the original IV used.
+
 ## COMPATIBILITY AND PERFORMANCE
 
 Ruby 2.6: test.rb with JdCrypt::AES takes 0.06s
