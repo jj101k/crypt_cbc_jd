@@ -113,9 +113,9 @@ if defined? JdCrypt::Blowfish
 end
 if defined? JdCrypt::AES
   tests_done += 1
-  test_cipher_full("AES", JdCrypt::AES, "aes-128", 16, 16)
-  test_cipher_full("AES", JdCrypt::AES, "aes-192", 16, 24)
-  test_cipher_full("AES", JdCrypt::AES, "aes-256", 16, 32)
+  test_cipher_full("AES (128)", JdCrypt::AES, "aes-128", 16, 16)
+  test_cipher_full("AES (192)", JdCrypt::AES, "aes-192", 16, 24)
+  test_cipher_full("AES (256)", JdCrypt::AES, "aes-256", 16, 32)
 end
 
 puts "No detectable block-encryption modules; skipping openssl tests" if tests_done.zero?
