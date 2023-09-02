@@ -69,22 +69,52 @@ def compare(fake_openssl, real_openssl, plaintext)
   raise "#{fake_openssl} produced a mismatching result (lengths #{fake_result.length}/#{real_result.length}" if fake_result != real_result
 end
 
+# Verifies that the cipher can properly decrypt what it encrypts
+def verify_cipher(cipher, iv, plaintext)
+  cbc = JdCrypt::CBC.new(cipher)
+  raise "Cannot decrypt what we encrypt" unless plaintext == cbc.decrypt(iv, cbc.encrypt(iv, plaintext))
+
+  riv, rct = cbc.encrypt_simple(plaintext)
+  raise "Random IV is unchanged" if iv == riv
+  raise "Cannot decrypt what we encrypt (random IV)" unless plaintext == cbc.decrypt(riv, rct)
+end
+
 tests_done = 0
 if defined? JdCrypt::Blowfish
+  puts "Testing Blowfish"
   tests_done += 1
   key_hex = "DB" * 16
   iv_hex = "00" * 8
+
+  cipher = JdCrypt::Blowfish.new(key)
+  verify_cipher(cipher, [iv_hex].pack("H*"), plaintext)
+
+  puts "Cipher verified; testing compatibility & speed"
+
   fake_openssl = "#{ENV["_"]} ./openssl_like.rb blowfish Blowfish #{key_hex} #{iv_hex}"
   real_openssl = "openssl enc -bf-cbc -K #{key_hex} -iv #{iv_hex}"
+
   compare(fake_openssl, real_openssl, plaintext)
+
+  puts "Tests complete for this cipher"
 end
 if defined? JdCrypt::AES
   tests_done += 1
   key_hex = "DB" * 16
   iv_hex = "00" * 16
+
+  key = [key_hex].pack("H*")
+  cipher = JdCrypt::AES.new(key)
+  verify_cipher(cipher, [iv_hex].pack("H*"), plaintext)
+
+  puts "Cipher verified; testing compatibility & speed"
+
   fake_openssl = "#{ENV["_"]} ./openssl_like.rb aes AES #{key_hex} #{iv_hex}"
   real_openssl = "openssl enc -aes-128-cbc -nosalt -K #{key_hex} -iv #{iv_hex}"
+
   compare(fake_openssl, real_openssl, plaintext)
+
+  puts "Tests complete for this cipher"
 end
 
 puts "No detectable block-encryption modules; skipping openssl tests" if tests_done.zero?
